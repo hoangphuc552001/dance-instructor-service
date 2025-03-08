@@ -1,0 +1,202 @@
+basePath: /
+definitions:
+  requests.UpsertInstructorRequest:
+    properties:
+      availability:
+        type: string
+      bio:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      specialty:
+        type: string
+    required:
+    - bio
+    - id
+    - name
+    type: object
+  responses.ResponseData:
+    properties:
+      data: {}
+      message:
+        type: string
+    type: object
+  responses.ResponseDataForGetList:
+    properties:
+      list: {}
+      total:
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: This is a Dance Instructor app.
+  title: Dance Instructor App
+  version: "2.0"
+paths:
+  /api/v1/instructors:
+    get:
+      consumes:
+      - application/json
+      description: Get all instructors
+      parameters:
+      - description: token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.ResponseDataForGetList'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+      tags:
+      - instructors
+    post:
+      consumes:
+      - application/json
+      description: Create instructor
+      parameters:
+      - description: token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Instructor data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UpsertInstructorRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+      tags:
+      - instructors
+  /api/v1/instructors/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete instructor
+      parameters:
+      - description: token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Instructor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+      tags:
+      - instructors
+    get:
+      consumes:
+      - application/json
+      description: Get instructor by ID
+      parameters:
+      - description: token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Instructor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+      tags:
+      - instructors
+    put:
+      consumes:
+      - application/json
+      description: Update instructor
+      parameters:
+      - description: token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Instructor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Instructor data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/requests.UpsertInstructorRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.ResponseData'
+      tags:
+      - instructors
+swagger: "2.0"
